@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% block head %}
+<title>Medict - Blogs</title>
+{% endblock head %} {% block body %}
+<main id="main">
+  <section id="blogs" class="blogs section-bg">
+    <div class="container" data-aos="fade-up">
+      <div class="section-title">
+        <h2>Blogs</h2>
+        <p></p>
+      </div>
+      <div class="row justify-content-center">
+        {% for blog in blogs %}
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch mx-4 mb-5">
+          <a href="./blogpost/{{blog.sno}}">
+            <div class="blog-item" data-aos="fade-up" data-aos-delay="100">
+              <div class="blog-img">
+                <img
+                  src="{{blog.thumbimg.url}}"
+                  class="img-fluid"
+                  alt="{{blog.title}}"
+                />
+              </div>
+              <div class="blog-info">
+                <h4>{{blog.title}}</h4>
+                <span>{{blog.metadesc}}</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock body %}

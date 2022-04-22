@@ -1,0 +1,300 @@
+{% extends 'base.html' %} {% block head %}
+<title>Medict - Home</title>
+{% endblock head %} {% block body %}
+<section id="hero">
+  <div
+    id="heroCarousel"
+    data-bs-interval="5000"
+    class="carousel slide carousel-fade"
+    data-bs-ride="carousel"
+  >
+    <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+    <div class="carousel-inner" role="listbox">
+      <div class="carousel-item active">
+        <div
+          class="carousel-img"
+          style="background-image: url(static/img/hero-1.jpg)"
+        ></div>
+        <div class="container">
+          <h2>Welcome to <span>Medict</span></h2>
+          <p>
+            We makes sure that you are feeling fine with just a few clicks away.
+            Take up the small quiz and we'll predict what's troubling you!
+          </p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div
+          class="carousel-img"
+          style="background-image: url(static/img/hero-2.jpg)"
+        ></div>
+        <div class="container">
+          <h2>Welcome to <span>Medict</span></h2>
+          <p>
+            We makes sure that you are feeling fine with just a few clicks away.
+            Take up the small quiz and we'll predict what's troubling you!
+          </p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div
+          class="carousel-img"
+          style="background-image: url(static/img/hero-3.jpg)"
+        ></div>
+        <div class="container">
+          <h2>Welcome to <span>Medict</span></h2>
+          <p>
+            We makes sure that you are feeling fine with just a few clicks away.
+            Take up the small quiz and we'll predict what's troubling you!
+          </p>
+        </div>
+      </div>
+    </div>
+    <a
+      class="carousel-control-prev"
+      href="#heroCarousel"
+      role="button"
+      data-bs-slide="prev"
+    >
+      <span
+        class="carousel-control-prev-icon bi bi-chevron-left"
+        aria-hidden="true"
+      ></span>
+    </a>
+
+    <a
+      class="carousel-control-next"
+      href="#heroCarousel"
+      role="button"
+      data-bs-slide="next"
+    >
+      <span
+        class="carousel-control-next-icon bi bi-chevron-right"
+        aria-hidden="true"
+      ></span>
+    </a>
+  </div>
+</section>
+<main id="main">
+  <section id="about" class="about">
+    <div class="container" data-aos="fade-up">
+      <div class="section-title">
+        <h2>How our model works</h2>
+        <p></p>
+      </div>
+      <div class="row">
+        <div class="col-lg-6" data-aos="fade-right">
+          <img src="static/img/about.jpg" class="img-fluid" alt="" />
+        </div>
+        <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
+          <h3>The Disease Predicton Model integrated with our website.</h3>
+          <p class="fst-italic">
+            Which is empowered by a Django Backend Modelling Supervised Machine
+            Learning Algorithm. Talking about the user interface, we have a
+            website with complete prediction system installed into it. We have
+            133 symptoms visible as checkboxes for user to feed data.
+          </p>
+          <ul>
+            <li>
+              <i class="bi bi-check-circle"></i> To predict we need to select
+              the symptoms among them and click on button predict.
+            </li>
+            <li>
+              <i class="bi bi-check-circle"></i> As soon as the predict button
+              is hit, Django backend activates and the Supervised model which is
+              already trained using explicit dataset accepts the values.
+            </li>
+            <li>
+              <i class="bi bi-check-circle"></i> Then converts it to model
+              understandable Language (Data Preprocessing) and predicts the
+              outcome using the predict operation.
+            </li>
+            <li>
+              <i class="bi bi-check-circle"></i> This predicted result is then
+              flushed to the frontend of the website for user notice.
+            </li>
+          </ul>
+          <p class="fst-italic">
+            Note:- The result is totally based on prediction. We don't register
+            any claim on the truth of this information.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="cta" class="cta">
+    <div class="container" data-aos="zoom-in">
+      <div class="text-center">
+        <p>ARE YOU FEELING FINE ? OR DO YOU HAVE ANY SYMPTOMS,</p>
+        <h3>IF YES ! let MEDICT predict the trouble you are facing</h3>
+        <a class="cta-btn scrollto" href="#prediction">Predict your Diseases</a>
+      </div>
+    </div>
+  </section>
+  <section id="prediction" class="prediction section-bg">
+    <div class="container" data-aos="fade-up">
+      <div class="section-title">
+        <h2>Make a Disease Prediction</h2>
+        <p></p>
+      </div>
+      <form
+        action="predict"
+        method="post"
+        role="form"
+        class="p-form"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-4 form-group">
+            <label for="">Your Name</label>
+            <input
+              type="text"
+              name="name"
+              class="form-control"
+              id="name"
+              required
+            />
+          </div>
+          <div class="col-md-4 form-group mt-3 mt-md-0">
+            <label for="">Your Email</label>
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              id="email"
+              required
+            />
+          </div>
+          <div class="col-md-4 form-group mt-3 mt-md-0">
+            <label for="">Your Age</label>
+            <input
+              type="number"
+              class="form-control"
+              name="age"
+              id="age"
+              required
+            />
+          </div>
+        </div>
+        <div class="row">
+          <h3 class="text-center mt-4 fs-5">Mark the things you are feeling</h3>
+          {% for disease in diseases %}
+          <div
+            class="col-md-3 col-4 form-group d-flex justify-content-start align-items-center"
+          >
+            <input
+              type="hidden"
+              name="{{disease}}"
+              id="{{disease}}1"
+              value="0"
+            />
+            <input type="checkbox" id="{{disease}}" onchange="change(this)" />
+            <span class="ms-2">{{disease}}</span>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="text-center mt-3">
+          <button type="submit">Predict</button>
+        </div>
+      </form>
+    </div>
+  </section>
+  <script>
+    function change(e) {
+      let name = document.getElementById(e.id + "1");
+      if (e.checked) {
+        name.value = 1;
+      } else {
+        name.value = 0;
+      }
+    }
+  </script>
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="section-title">
+        <h2>Contact Us</h2>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row mt-5">
+        <div class="col-lg-6">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="info-box">
+                <i class="bx bx-map"></i>
+                <h3>Our Address</h3>
+                <p>Somewhere at 127.0.0.1</p>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="info-box mt-4">
+                <i class="bx bx-envelope"></i>
+                <h3>Email Us</h3>
+                <p>info@medict.com<br />contact@medict.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <form action="contact" method="post" role="form" class="c-form">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col form-group mt-3">
+                <input
+                  type="text"
+                  name="name"
+                  class="form-control"
+                  id="name"
+                  placeholder="Your Name"
+                  required
+                />
+              </div>
+              <div class="col form-group mt-3">
+                <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  id="email"
+                  placeholder="Your Email"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group mt-3">
+              <input
+                type="text"
+                class="form-control"
+                name="subject"
+                id="subject"
+                placeholder="Subject"
+                required
+              />
+            </div>
+            <div class="form-group mt-3">
+              <textarea
+                class="form-control"
+                name="message"
+                rows="5"
+                placeholder="Message"
+                required
+              ></textarea>
+            </div>
+            {% if contactsubmittion %}
+            <div class="my-3">
+              <div class="sent-message">
+                Your message has been sent. Thank you!
+              </div>
+            </div>
+            {% endif %}
+            <div class="text-center mt-3">
+              <button type="submit">Send Message</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock body %}

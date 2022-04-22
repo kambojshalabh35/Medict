@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Medict - Disease Prediction</title>
+{% endblock head %}
+{% block body %}
+<main id="main" style="min-height: 86.7vh">
+    <div class="container py-5">
+        <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_gvofx8ha.json"  background="transparent" speed="1" class="col-4 mt-4 mx-auto" loop autoplay></lottie-player>
+    </div>
+    <p class="text-center fs-5">
+        According to the symptoms you provided you may be having {{final_prediction}}
+    </p>
+</main>
+{% endblock body %}

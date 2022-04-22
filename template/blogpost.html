@@ -1,0 +1,53 @@
+{% extends 'base.html' %} {% block head %}
+<title>Medict - {{blog.title}}</title>
+{% endblock head %} {% block body %}
+<main id="main">
+  <section id="blog" class="blog section-bg">
+    <div class="container" data-aos="fade-up">
+      <div class="row">
+        <div class="col-lg-10 entries">
+          <article class="entry entry-single">
+            <div class="entry-img">
+              <img
+                src="{{blog.featureimg.url}}"
+                alt="{{blog.title}"
+                class="col-12"
+              />
+            </div>
+            <h2 class="entry-title">
+              <a href="#">{{blog.title}}</a>
+            </h2>
+            <div class="entry-meta">
+              <ul>
+                <li class="d-flex align-items-center">
+                  <i class="bi bi-person"></i>
+                  <a href="blog-single.html">{{blog.author}}</a>
+                </li>
+                <li class="d-flex align-items-center">
+                  <i class="bi bi-clock"></i>
+                  <a href="blog-single.html">
+                    <time datetime="{{blog.dateposted}}"
+                      >{{blog.dateposted}}</time
+                    >
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="entry-content">
+              <div>{{ blog.content|safe }}</div>
+            </div>
+            <div class="entry-footer">
+              <i class="bi bi-tags"></i>
+              <ul class="tags">
+                {% for tag in tags %}
+                <li><a>{{tag}}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock body %}
